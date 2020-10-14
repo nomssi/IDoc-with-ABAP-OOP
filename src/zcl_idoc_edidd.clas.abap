@@ -3,6 +3,7 @@ CLASS zcl_idoc_edidd DEFINITION
   CREATE PROTECTED .
 
   PUBLIC SECTION.
+    TYPES tt_edi_api TYPE STANDARD TABLE OF edi_iapi06.
 
     CLASS-METHODS create_with_data
       IMPORTING
@@ -36,14 +37,14 @@ CLASS zcl_idoc_edidd DEFINITION
   PROTECTED SECTION.
 
     TYPES:
-      ygt_idoc_structure_sorted TYPE SORTED TABLE OF edi_iapi06
+      tt_idoc_structure_sorted TYPE SORTED TABLE OF edi_iapi06
         WITH UNIQUE KEY idoctyp cimtyp nr
-        WITH UNIQUE SORTED KEY segtyp COMPONENTS segtyp .
+        WITH UNIQUE SORTED KEY segtyp COMPONENTS segtyp.
 
-    DATA ao_segments TYPE REF TO cl_object_collection .
-    DATA at_idoc_structure TYPE fkk_edi_iapi06_tt .
-    DATA at_idoc_structure_sorted TYPE ygt_idoc_structure_sorted .
-    DATA av_idoc_extension TYPE edi_cimtyp .
+    DATA ao_segments TYPE REF TO cl_object_collection.
+    DATA at_idoc_structure TYPE tt_edi_api.
+    DATA at_idoc_structure_sorted TYPE tt_idoc_structure_sorted.
+    DATA av_idoc_extension TYPE edi_cimtyp.
     DATA av_idoc_type TYPE edi_idoctp .
 
     METHODS add_segment_do
@@ -59,7 +60,7 @@ CLASS zcl_idoc_edidd DEFINITION
         !iv_idoc_type      TYPE edi_idoctp
         !iv_idoc_extension TYPE edi_cimtyp
         !it_edidd          TYPE edidd_tt OPTIONAL
-        !it_idoc_structure TYPE fkk_edi_iapi06_tt
+        !it_idoc_structure TYPE tt_edi_api
       RAISING
         zcx_idoc_exceptions .
   PRIVATE SECTION.
@@ -236,7 +237,7 @@ CLASS zcl_idoc_edidd IMPLEMENTATION.
 
   METHOD create_with_data.
     DATA:
-      lt_idoc_structure TYPE fkk_edi_iapi06_tt.
+      lt_idoc_structure TYPE tt_edi_api.
 
     CALL FUNCTION 'EDI_IDOC_SYNTAX_GET'
       EXPORTING

@@ -4,7 +4,7 @@ CLASS zcl_idoc_edidd_segment DEFINITION
   FINAL
   CREATE PUBLIC
 
-  GLOBAL FRIENDS zcl_idoc_edidd .
+  GLOBAL FRIENDS zcl_idoc_edidd.
 
   PUBLIC SECTION.
 
@@ -13,7 +13,7 @@ CLASS zcl_idoc_edidd_segment DEFINITION
         !iv_idoc_type      TYPE edi_idoctp
         !iv_idoc_extension TYPE edi_cimtyp
         !is_edidd          TYPE edidd
-        !it_idoc_structure TYPE fkk_edi_iapi06_tt
+        !it_idoc_structure TYPE tt_edi_api
       RAISING
         zcx_idoc_exceptions .
     METHODS get_name
